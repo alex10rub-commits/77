@@ -8,8 +8,8 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-BOT_TOKEN = os.getenv("BOT_TOKEN", "СЮДА_ТОКЕН")
-CHAT_ID   = os.getenv("CHAT_ID", "СЮДА_CHAT_ID")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "8740001087:AAHh4ULCEovFIToZ1oK2gzaEV7599gHxpno")
+CHAT_ID   = os.getenv("CHAT_ID", "8784493975")
 
 def send_to_tg(text: str):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
